@@ -2,6 +2,7 @@ from django.urls import path
 
 from apps.main_app import views
 from apps.user.views import *
+from apps.order.views import *
 app_name = 'main_app'
 
 urlpatterns = [
@@ -17,4 +18,5 @@ urlpatterns = [
     path('activate/<str:activation_code>/', ActivationView.as_view()),
     path('login/', LoginView.as_view()),
     path('logout/', LogoutView.as_view()),
+    path('orders/', OrderViewSet.as_view),
 ]

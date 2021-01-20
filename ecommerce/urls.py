@@ -38,5 +38,7 @@ urlpatterns = [
     path('api/v1/add-image/', ProductImageView.as_view()),
 
     path('api/v1/', include(router.urls)),
+    path('api/v1/orders/', include('apps.order.urls')),
+    path('api/v1/cart/', include('apps.cart.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
