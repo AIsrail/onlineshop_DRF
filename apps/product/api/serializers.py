@@ -3,6 +3,9 @@ from rest_framework import serializers
 from apps.category.serializers import CategorySerializer
 from apps.product.models import Product, ProductImage
 
+from rest_framework import serializers
+from .models import *
+
 
 class ProductAPIImageSerializer(serializers.ModelSerializer):
 
@@ -18,7 +21,7 @@ class ProductAPISerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = (
-            'images', 'category', 'id', 'title', 'body'
+            'images', 'category', 'id', 'title', 'description'
         )
 
 

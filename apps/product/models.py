@@ -15,9 +15,9 @@ class DateABC(models.Model):
 
 class Product(DateABC):
     title = models.CharField(max_length=150)
-    body = models.TextField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    sale_price = models.DecimalField(max_digits=10, decimal_places=2)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    discount = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     featured = models.BooleanField(default=False)
     in_stock = models.BooleanField(default=False)
     quantity = models.PositiveSmallIntegerField(default=0)
@@ -29,7 +29,6 @@ class Product(DateABC):
 
 
 class ProductImage(DateABC):
-    alt_title = models.CharField(max_length=100)
     image = models.ImageField(upload_to=upload_image_path)
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name='images'

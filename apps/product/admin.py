@@ -11,7 +11,7 @@ class ProductImageAdmin(admin.StackedInline):
 
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductImageAdmin, ]
-    list_display = ('id', 'title', 'price', 'sale_price', 'get_image')
+    list_display = ('id', 'title', 'price', 'discount', 'get_image')
 
     def get_image(self, obj):
         img = obj.images.first()

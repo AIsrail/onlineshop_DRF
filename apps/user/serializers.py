@@ -51,5 +51,5 @@ class LoginSerializer(TokenObtainPairSerializer):
             refresh =  self.get_token(user)
             attrs['refresh'] = str(refresh)
             attrs['access'] = str(refresh.access_token)
-            attrs['user'] = {'user_id':user.id, 'user_email': user.email}
+            attrs['user'] = {'user_id': user.id, 'user_email': user.email}
         return attrs
