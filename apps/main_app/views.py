@@ -1,22 +1,18 @@
-from django.views.generic import TemplateView
 from datetime import timedelta
 
 from django.db.models import Q
 from django.utils import timezone
-from rest_framework.decorators import api_view, action
-from rest_framework.pagination import PageNumberPagination
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from django.views.generic import TemplateView
 from rest_framework import generics, viewsets, status
+from rest_framework.decorators import action
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import AllowAny
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from rest_framework.views import APIView
-
-from apps.category.models import *
-from apps.category.serializers import *
-from apps.product.models import *
-from apps.product.api.serializers import *
 from apps.main_app.permissions import *
+from apps.product.api.serializers import *
+from apps.product.models import *
 
 
 class IndexPageView(TemplateView):
