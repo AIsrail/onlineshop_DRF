@@ -38,9 +38,6 @@ class LoginSerializer(TokenObtainPairSerializer):
             user = authenticate(request=self.context.get('request'),
                                 username=email, password=password)
 
-            # The authenticate call simply returns None for is_active=False
-            # users. (Assuming the default ModelBackend authentication
-            # backend.)
             if not user:
                 msg = _('Не удаётся авторизоваться с введёнными данными.')
                 raise serializers.ValidationError(msg, code='authorization')

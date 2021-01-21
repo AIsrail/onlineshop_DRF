@@ -29,7 +29,9 @@ router.register('products', ProductViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('', include('apps.main_app.urls')),
+
     path('products/', include('apps.product.urls')),
     path('api/v1/accounts/', include('apps.user.urls')),
 
@@ -40,5 +42,7 @@ urlpatterns = [
     path('api/v1/', include(router.urls)),
     path('api/v1/orders/', include('apps.order.urls')),
     path('api/v1/cart/', include('apps.cart.urls')),
+
+    path('api/v1/products/', ProductListView.as_view()),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -3,6 +3,7 @@ from django.db import models
 from apps.product.models import Product
 from apps.user.models import CustomUser
 
+
 # class User(models.Model):
 #     name = models.CharField(max_length=255, null=False)
 #     created_at = models.DateTimeField(auto_now_add=True)

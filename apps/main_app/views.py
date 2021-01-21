@@ -37,6 +37,15 @@ class CategoryListView(generics. ListAPIView):
     serializer_class = CategorySerializer
     permission_classes = [AllowAny, ]
 
+"""Test begin  - Product list """
+
+class ProductListView(generics. ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductAPISerializer
+    permission_classes = [AllowAny, ]
+
+"""Test end """
+
 
 class ProductViewSet(viewsets.GenericViewSet):
     queryset = Product.objects.all()
