@@ -39,9 +39,10 @@ class UserManager(BaseUserManager):
 class CustomUser(AbstractUser):
     password = models.CharField(max_length=100)
     activation_code = models.CharField(max_length=100)
-    objects =  UserManager()
+    objects = UserManager()
     username = models.CharField(max_length=255, blank=True) 
     email = models.EmailField(unique=True)
+    phone_number = models.CharField(max_length=30, blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

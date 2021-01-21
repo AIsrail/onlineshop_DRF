@@ -1,13 +1,13 @@
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from .models import User, Cart, DeliveryCost
+from .models import Cart, DeliveryCost
 from .serializers import UserSerializer, CartSerializer, DeliveryCostSerializer
 from .helpers import CartHelper
-
+from apps.user.models import CustomUser
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all().order_by('id')
+    queryset = CustomUser.objects.all().order_by('id')
     serializer_class = UserSerializer
 
 
@@ -19,7 +19,7 @@ class CartViewSet(viewsets.ModelViewSet):
     def checkout(self, request, *args, **kwargs):
 
         try:
-            user = User.objects.get(pk=int(kwargs.get('userId')))
+            user = CustomUser.objects.get(pk=int(kwargs.get('userId')))
         except Exception as e:
             return Response(status=status.HTTP_404_NOT_FOUND,
                             data={'Error': str(e)})

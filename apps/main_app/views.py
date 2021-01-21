@@ -9,6 +9,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import AllowAny
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 from apps.main_app.permissions import *
 from apps.product.api.serializers import *
@@ -71,11 +72,10 @@ class ProductViewSet(viewsets.GenericViewSet):
 
     @action(detail=False, methods=['get'])
     def search(self, request, pk=None):
-        # print(request.query_params)
-        q = request.query_params.get('q')    # request.query_params  ==> request.GET
+        q = request.query_params.get('q')
         queryset = self.get_queryset()
         queryset = queryset.filter(Q(title__icontains=q) |
-                                   Q(text__icontains=q))
+                                   Q(description__icontains=q))
         serializer = ProductAPISerializer(queryset, many=True, context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -92,10 +92,14 @@ class ProductImageView(generics.ListCreateAPIView):
 class ProductView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductAPISerializer
+    filter_backends = (SearchFilter, OrderingFilter)
+    search_fields = ('title', 'description', 'user__username')
+
 
 class ProductDetailedView(generics.RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductAPISerializer
+
 
 class ProductUpdateView(generics.UpdateAPIView):
     queryset = Product.objects.all()
@@ -106,3 +110,22 @@ class ProductDeleteView(generics.DestroyAPIView):
     serializer_class = ProductAPISerializer
 
 
+
+
+
+
+# class ProductViewSet(ModelViewSet):
+#     queryset = Product.objects.all()
+#     serializer_class = ProductDetailSerializer
+#     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+#     filterset_fields = ['category', 'title_post']
+#     search_fields = ['category', 'title_post']
+#     permission_classes = [DjangoModelPermissionsOrAnonReadOnly, ]
+#
+#     def retrieve(self, request, pk):
+#         if request.method == 'GET':
+#             queryset = self.filter_queryset((self.get_queryset()))
+#             obj = self.get_object()
+#             obj.views += 1
+#             obj.save(update_fields=("views",))
+#         return super().retrieve(request)
